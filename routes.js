@@ -1,7 +1,7 @@
 const languageController = require('./controller/Language');
-//const wordController = require('../controller/Word');
-//const wordTranslatedController = require('../controller/WordTranslated');
-//const categoryController = require('../controller/Category');
+const wordController = require('./controller/Word');
+const wordTranslatedController = require('./controller/WordTranslated');
+const categoryController = require('./controller/Category');
 
 
 module.exports = function (app, jwtCheck){
@@ -12,7 +12,7 @@ module.exports = function (app, jwtCheck){
     app.route('/api/languages/:id').put(jwtCheck, languageController.update);
     app.route('/api/languages/:id').delete(jwtCheck, languageController.remove);
 
-    /*app.route('/api/words').get(wordController.getAll);
+    app.route('/api/words').get(wordController.getAll);
     app.route('/api/words').post(wordController.create);
     app.route('/api/words/:id').get(wordController.get);
     app.route('/api/words/:id').put(wordController.update);
@@ -29,7 +29,7 @@ module.exports = function (app, jwtCheck){
     app.route('/api/categories').post(categoryController.create);
     app.route('/api/categories/:id').get(categoryController.get);
     app.route('/api/categories/:id').put(categoryController.update);
-    app.route('/api/categories/:id').delete(categoryController.remove);*/
+    app.route('/api/categories/:id').delete(categoryController.remove);
 
     app.use('/api/', function (req, res){
         res.status(404).json({url: req.originalUrl, error: 'not found'});
