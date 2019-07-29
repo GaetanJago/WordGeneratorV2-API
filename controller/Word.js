@@ -21,8 +21,10 @@ const wordController = {
     create: function (req, res) {
         const newWord = new word(req.body);
         newWord.save(function (err, savedWord) {
+            if(err) return respond(err, savedWord, res);
             req.body.categories.forEach(categoryId => {
                 category.findById(categoryId).exec(function(err, categoryFound) {
+                    if(err) return respond(err, savedWord, res);
                     categoryFound.words.push(savedWord._id);
                     categoryFound.save();
                     
